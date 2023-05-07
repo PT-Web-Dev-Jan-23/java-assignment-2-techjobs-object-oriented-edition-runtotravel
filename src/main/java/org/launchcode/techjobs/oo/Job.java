@@ -26,6 +26,50 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
+        Job job = (Job) o;
+        return getId() == job.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        String emptyField = "Data not available";
+        if (this.getName().equals("")) {
+            this.setName(emptyField);
+        }
+        if (this.getEmployer().getValue().equals("")) {
+            this.setEmployer(new Employer(emptyField));
+        }
+        if (this.getLocation().getValue().equals("")) {
+            this.setLocation(new Location(emptyField));
+        }
+        if (this.getPositionType().getValue().equals("")) {
+            this.setPositionType(new PositionType(emptyField));
+        }
+        if (this.getCoreCompetency().getValue().equals("")) {
+            this.setCoreCompetency(new CoreCompetency(emptyField));
+        }
+
+        return "\n" +
+                "ID: " + this.getId() + "\n" +
+                "Name: " + this.getName() + "\n" +
+                "Employer: " + this.getEmployer().getValue() + "\n" +
+                "Location: " + this.getLocation().getValue() + "\n" +
+                "Position Type: " + this.getPositionType().getValue() + "\n" +
+                "Core Competency: " + this.getCoreCompetency().getValue() +
+                "\n";
+    }
+
+
+
 
     public String getName() {
         return name;
@@ -71,27 +115,4 @@ public class Job {
         return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
-        return getId() == job.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
-
-    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
-    //  other five fields. The second constructor should also call the first in order to initialize
-    //  the 'id' field.
-
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
-
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
 }

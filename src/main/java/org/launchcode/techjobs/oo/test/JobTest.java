@@ -43,11 +43,56 @@ public class JobTest {
 
     @Test
     public void testJobsForEquality() {
-        Job jobThree = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        Job jobFour = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        assertFalse(jobThree.equals(jobFour));
+        Job jobB = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        Job jobC = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        assertFalse(jobB.equals(jobC));
+    }
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job jobD = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String jobDString = jobD.toString();
+        char firstCharacter = jobDString.charAt(0);
+        char lastCharacter = jobDString.charAt(jobDString.length()-1);
+        assertEquals(firstCharacter, '\n');
+        assertEquals(lastCharacter, '\n');
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job jobE = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String jobEString = jobE.toString();
+        String testingString =
+                "\n" +
+                "ID: " + jobE.getId() + "\n" +
+                "Name: " + "Product tester" + "\n" +
+                "Employer: " + "ACME" + "\n" +
+                "Location: " + "Desert" + "\n" +
+                "Position Type: " + "Quality control" + "\n" +
+                "Core Competency: " + "Persistence" +
+                "\n";
+        assertEquals(testingString, jobEString);
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job jobF = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String emptyField = "Data not available";
+        String jobFString = jobF.toString();
+        String testingString =
+                "\n" +
+                "ID: " + jobF.getId() + "\n" +
+                "Name: " + emptyField + "\n" +
+                "Employer: " + "ACME" + "\n" +
+                "Location: " + "Desert" + "\n" +
+                "Position Type: " + emptyField + "\n" +
+                "Core Competency: " + "Persistence" +
+                "\n";
+        assertEquals(testingString, jobFString);
     }
 }
+
+
 
 
 
